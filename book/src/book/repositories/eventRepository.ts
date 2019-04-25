@@ -12,6 +12,6 @@ export class EventRepository {
 
   async save(eventDescriptor: { aggregateId: string, eventName: string, data: string }): Promise<void>{
     const container = this.getEventContainer();
-    await container.items.create(eventDescriptor);
+    await container.items.create(eventDescriptor);    
   }
 }

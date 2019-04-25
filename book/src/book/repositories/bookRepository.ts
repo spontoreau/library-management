@@ -9,7 +9,7 @@ export class BookRepository extends AbstractRepository {
     const container = this.getEventContainer();
 
     const querySpec: SqlQuerySpec = {
-      query: `SELECT root.aggregateId root.eventName root.data
+      query: `SELECT *
               FROM root
               WHERE root.aggregateId   = @aggregateId    
       `,
@@ -19,7 +19,7 @@ export class BookRepository extends AbstractRepository {
       }]
     }
 
-    const response = await container.items.query(querySpec).toArray();
+    const response = await container.items.query(querySpec, { enableCrossPartitionQuery: true }).toArray();
 
     if(response.result.length > 0) {
       const book = new Book(aggregateId);

@@ -18,16 +18,15 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
     if(!command.author || !command.code || !command.title) {
       throw new InvalidBookException()
     }
-
-    //Code must be unique
-    const book = this.publisher.mergeObjectContext(
-      await this.repository.get(command.code)
-    )
+    
+    const book = await this.repository.get(command.code);
 
     if(book) {
       throw new BookExistsException();
     } else {
-      const newBook = new Book(command.code);
+      const newBook = this.publisher.mergeObjectContext(
+        new Book(command.code)
+      );
       newBook.create(command.title, command.author);
       newBook.commit();
     }
