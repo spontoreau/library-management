@@ -23,7 +23,10 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'book/dist'
+    SourceFolder: 'book'
+    Contents: 'dist/
+package-lock.json
+package.json'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
