@@ -1,19 +1,19 @@
 import { CommandHandler, ICommandHandler, EventPublisher } from "@nestjs/cqrs";
-import { CreateBook } from "./createBook";
+import { CreateBookCommand } from "./createBookCommand";
 import { InvalidBookException } from "../exceptions/InvalidBookException";
 import { Book } from "../aggregates/book";
 import { BookRepository } from "../repositories/bookRepository";
 import { BookExistsException } from "../exceptions/BookExistsException";
 
-@CommandHandler(CreateBook)
-export class CreateBookCommandHandler implements ICommandHandler<CreateBook> {
+@CommandHandler(CreateBookCommand)
+export class CreateBookCommandHandler implements ICommandHandler<CreateBookCommand> {
 
   constructor(
     private readonly repository: BookRepository,
     private readonly publisher: EventPublisher
   ) { }
 
-  async execute(command: CreateBook): Promise<void> {
+  async execute(command: CreateBookCommand): Promise<void> {
     //Data validation    
     if(!command.author || !command.code || !command.title) {
       throw new InvalidBookException()
