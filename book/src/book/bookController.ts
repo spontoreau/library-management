@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { GetAllBookQuery } from "./queries/getAllBookQuery";
-import { BookModel } from "./models/bookModel";
+import { BookProjection } from "./projections/bookProjection";
 
 @Controller("book")
 export class BookController {
@@ -10,7 +10,7 @@ export class BookController {
   ) {}
 
   @Get()
-  async getAll(): Promise<BookModel> {
+  async getAll(): Promise<BookProjection> {
     return this.queryBus.execute(new GetAllBookQuery());
   }
 }

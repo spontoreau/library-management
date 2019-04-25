@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CosmosClient } from "@azure/cosmos";
-import { BookModel } from "../models/bookModel";
+import { BookProjection } from "../projections/bookProjection";
 
 @Injectable()
 export class BookFinder {
@@ -14,7 +14,7 @@ export class BookFinder {
 
   async getAll() {
     const container = this.getBookContainer();
-    const response = await container.items.readAll<BookModel>().toArray();
+    const response = await container.items.readAll<BookProjection>().toArray();
     return response.result;
   }
 }

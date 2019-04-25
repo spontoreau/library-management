@@ -10,16 +10,10 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: 'book'
-
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    workingDir: 'book'
-    customCommand: 'run build'
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
 
 - task: CopyFiles@2
   inputs:

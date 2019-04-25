@@ -1,4 +1,4 @@
-export interface BookModel {
+export class CreateBook {
   code: string;
   title: string;
   author: string;

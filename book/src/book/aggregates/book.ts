@@ -1,7 +1,21 @@
-import { AggregateRoot } from "@nestjs/cqrs";
+import { AggregateRoot, IEvent } from "@nestjs/cqrs";
+import { BookCreatedEvent } from "../events/bookCreatedEvent";
 
 export class Book extends AggregateRoot {
-  constructor(private readonly id: string) {
+  state: {
+    title: string;
+    author: string;
+  };
+
+  constructor(readonly aggreateId: string) {
     super();
+  }
+
+  create(title: string, author: string) {
+    this.apply(new BookCreatedEvent(this.aggreateId, title, author));
+  }
+
+  loadFromHistory(events: IEvent[]) {
+    // TODO
   }
 }
