@@ -23,10 +23,14 @@ steps:
 
 - task: CopyFiles@2
   inputs:
+    SourceFolder: 'book/dist'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/dist'
+
+- task: CopyFiles@2
+  inputs:
     SourceFolder: 'book'
-    Contents: '**/*.js
-package-lock.json
-package.json'
+    Contents: 'package-json
+    package-lock.json'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
