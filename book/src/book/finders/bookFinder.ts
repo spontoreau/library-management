@@ -14,7 +14,14 @@ export class BookFinder {
 
   async getAll() {
     const container = this.getBookContainer();
-    const response = await container.items.readAll<BookProjection>().toArray();
-    return response.result;
+    const { result: items } = await container.items.readAll().toArray();
+    return items.map<BookProjection>((value) => {
+      return {
+        code: value.code,
+        title: value.title,
+        author: value.author,
+        lent: value.lent
+      };
+    });;
   }
 }
