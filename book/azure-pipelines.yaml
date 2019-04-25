@@ -24,7 +24,7 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: 'book'
-    Contents: 'dist/
+    Contents: '**/*.js
 package-lock.json
 package.json'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
