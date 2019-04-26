@@ -18,10 +18,6 @@ export class BookController {
 
   @Post()
   async post(@Body()book: { code: string, title: string, author: string}) {
-    const command = new CreateBookCommand()
-    command.code = book.code;
-    command.title = book.title;
-    command.author = book.author;
-    return this.commandBus.execute(command);
+    return this.commandBus.execute(new CreateBookCommand(book.code, book.title, book.author));
   }
 }
