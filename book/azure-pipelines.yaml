@@ -28,11 +28,6 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'book/node_modules'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/node_modules'
-
-- task: CopyFiles@2
-  inputs:
     SourceFolder: 'book'
     Contents: 'package.json'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
@@ -42,6 +37,12 @@ steps:
     SourceFolder: 'book'
     Contents: 'package-lock.json'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: Npm@1
+  inputs:
+    command: custom
+    workingDir: '$(Build.ArtifactStagingDirectory)'
+    customCommand: 'install --production'
 
 - task: PublishBuildArtifacts@1
   inputs:
