@@ -28,6 +28,11 @@ steps:
 
 - task: CopyFiles@2
   inputs:
+    SourceFolder: 'book/node_modules'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/node_modules'
+
+- task: CopyFiles@2
+  inputs:
     SourceFolder: 'book'
     Contents: 'package.json'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
