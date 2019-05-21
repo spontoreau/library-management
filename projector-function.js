@@ -1,3 +1,5 @@
+
+// Bad implementation, need a refactoring
 const cosmos = require('@azure/cosmos');
 
 const createBookProjections = async (context, documents) => {
