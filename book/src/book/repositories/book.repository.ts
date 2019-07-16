@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { Book } from "../aggregates/book";
-import { AbstractRepository } from "./abstractRespository";
+import { BookAggregate } from "../aggregates/book.aggregate";
+import { AbstractRepository } from "./abstract.respository";
 import { SqlQuerySpec } from "@azure/cosmos";
 
 @Injectable()
 export class BookRepository extends AbstractRepository {
-  async get(aggregateId: string): Promise<Book>{
+  async get(aggregateId: string): Promise<BookAggregate>{
     const container = this.getEventContainer();
 
     const querySpec: SqlQuerySpec = {
@@ -22,7 +22,7 @@ export class BookRepository extends AbstractRepository {
     const response = await container.items.query(querySpec, { enableCrossPartitionQuery: true }).toArray();
 
     if(response.result.length > 0) {
-      const book = new Book(aggregateId);
+      const book = new BookAggregate(aggregateId);
       book.loadFromHistory(response.result);
       return book;
     } else {

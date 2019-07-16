@@ -1,5 +1,5 @@
 import { IEventHandler, EventsHandler } from "@nestjs/cqrs";
-import { EventRepository } from "../repositories/eventRepository";
+import { EventRepository } from "../repositories/event.repository";
 import { BookCreatedEvent } from "./bookCreatedEvent";
 
 @EventsHandler(BookCreatedEvent)

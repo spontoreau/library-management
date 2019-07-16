@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
-import { GetAllBookQuery } from "./getAllBookQuery";
-import { BookProjection } from "../projections/bookProjection";
-import { BookFinder } from "../finders/bookFinder";
+import { GetAllBookQuery } from "./get-all-book.query";
+import { BookProjection } from "./book.readmodel";
+import { BookFinder } from "../finders/book.finder";
 
 @QueryHandler(GetAllBookQuery)
 export class GetAllBookQueryHandler

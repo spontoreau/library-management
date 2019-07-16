@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CosmosClient } from "@azure/cosmos";
-import { BookProjection } from "../projections/bookProjection";
+import { BookProjection } from "../queries/book.readmodel";
 
 @Injectable()
 export class BookFinder {

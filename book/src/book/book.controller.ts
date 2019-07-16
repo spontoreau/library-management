@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { GetAllBookQuery } from "./queries/getAllBookQuery";
-import { BookProjection } from "./projections/bookProjection";
-import { CreateBookCommand } from "./commands/createBookCommand";
+import { GetAllBookQuery } from "./queries/get-all-book.query";
+import { BookProjection } from "./queries/book.readmodel";
+import { CreateBookCommand } from "./commands/create-book.command";
 
 @Controller("book")
 export class BookController {

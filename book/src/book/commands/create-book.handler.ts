@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler, EventPublisher } from "@nestjs/cqrs";
-import { CreateBookCommand } from "./createBookCommand";
+import { CreateBookCommand } from "./create-book.command";
 import { InvalidBookException } from "../exceptions/InvalidBookException";
-import { Book } from "../aggregates/book";
-import { BookRepository } from "../repositories/bookRepository";
+import { BookAggregate } from "../aggregates/book.aggregate";
+import { BookRepository } from "../repositories/book.repository";
 import { BookExistsException } from "../exceptions/BookExistsException";
 
 @CommandHandler(CreateBookCommand)
@@ -25,7 +25,7 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
       throw new BookExistsException();
     } else {
       const newBook = this.publisher.mergeObjectContext(
-        new Book(command.code)
+        new BookAggregate(command.code)
       );
       newBook.create(command.title, command.author);
       newBook.commit();
