@@ -1,23 +1,28 @@
-import { Module } from "@nestjs/common";
-import { CqrsModule } from "@nestjs/cqrs";
+import { Module, OnModuleInit } from "@nestjs/common";
+import { EventBus, CqrsModule } from "@nestjs/cqrs";
 import { BookController } from "./book.controller";
 import { BookFinder } from "./finders/book.finder";
 import { GetAllBookQueryHandler } from "./queries/get-all-book.handler";
-import { BookRepository } from "./repositories/book.repository";
-import { EventRepository } from "./repositories/event.repository";
 import { CreateBookCommandHandler } from "./commands/create-book.handler";
-import { BookCreatedEventHandler } from "./events/bookCreatedEventHandler";
+import { EventStorePublisher } from "src/event-store/event-store.publisher";
+import { EventStoreModule } from "src/event-store/event-store.module";
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, EventStoreModule],
   controllers: [BookController],
   providers: [
     BookFinder,
-    BookRepository,
-    EventRepository,
     GetAllBookQueryHandler,
     CreateBookCommandHandler,
-    BookCreatedEventHandler
   ]
 })
-export class BookModule {}
+export class BookModule implements OnModuleInit {
+  constructor(
+    private readonly eventBus: EventBus,
+    private readonly eventStore: EventStorePublisher,
+  ) {}
+  onModuleInit() {
+    this.eventBus.publisher = this.eventStore;
+  }
+
+}

@@ -16,6 +16,8 @@ export class BookAggregate extends AggregateRoot {
   }
 
   loadFromHistory(events: IEvent[]) {
-    // TODO
+    events.forEach(e =>  {
+
+    })
   }
 }

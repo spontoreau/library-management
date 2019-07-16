@@ -1,9 +1,10 @@
 import { IEvent } from "@nestjs/cqrs";
+import { Event } from "../../event-store/event.decorator";
 
+@Event()
 export class BookCreatedEvent implements IEvent {
-  static readonly eventName = "BookCreated";
   constructor(
-    public readonly code: string,
+    public readonly aggregateId: string,
     public readonly title: string,
     public readonly author: string,
   ) { }
