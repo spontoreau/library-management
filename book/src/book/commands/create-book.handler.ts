@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler, EventPublisher } from "@nestjs/cqrs";
 import { CreateBookCommand } from "./create-book.command";
 import { BookAggregate } from "../aggregates/book";
-import { BookExistsException } from "../exceptions/BookExistsException";
+import { BookExistsException } from "../errors/book-exists.exception";
 import { EventStore } from "src/event-store/event-store";
 
 @CommandHandler(CreateBookCommand)

@@ -1,5 +1,5 @@
 import { AggregateRoot, IEvent } from "@nestjs/cqrs";
-import { BookCreatedEvent } from "../events/bookCreatedEvent";
+import { BookCreatedEvent } from "../events/book-created.event";
 
 export class BookAggregate extends AggregateRoot {
   state: {

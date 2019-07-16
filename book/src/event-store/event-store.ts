@@ -24,7 +24,9 @@ export class EventStore {
     const container = this.getContainer();
 
     const querySpec: SqlQuerySpec = {
-      query: `SELECT *
+      query: `SELECT 
+                root.eventType, 
+                root.payload 
               FROM root
               WHERE root.aggregateId   = @aggregateId    
       `,
