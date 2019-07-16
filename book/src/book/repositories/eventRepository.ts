@@ -7,7 +7,7 @@ export class EventRepository {
     const endpoint = process.env.STORE_ENDPOINT ? process.env.STORE_ENDPOINT : "";
     const masterKey = process.env.STORE_KEY ? process.env.STORE_KEY : "";
     const client = new CosmosClient({ endpoint, auth: { masterKey } });
-    return client.database("Library").container("Event");
+    return client.database("EventStore").container("Events");
   }
 
   async save(eventDescriptor: { aggregateId: string, eventName: string, data: string }): Promise<void>{
