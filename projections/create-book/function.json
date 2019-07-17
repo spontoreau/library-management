@@ -1,0 +1,14 @@
+{
+  "bindings": [
+    {
+      "type": "cosmosDBTrigger",
+      "name": "documents",
+      "connectionStringSetting": "event-store_DOCUMENTDB",
+      "databaseName": "EventStore",
+      "collectionName": "Event",
+      "leaseCollectionName": "Leases",
+      "createLeaseCollectionIfNotExists": true,
+      "direction": "in"
+    }
+  ]
+}
