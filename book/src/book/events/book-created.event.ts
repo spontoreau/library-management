@@ -6,6 +6,6 @@ export class BookCreatedEvent implements IEvent {
   constructor(
     public readonly aggregateId: string,
     public readonly title: string,
-    public readonly author: string,
-  ) { }
+    public readonly author: string
+  ) {}
 }

@@ -1,11 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 import { ValidationPipe } from "@nestjs/common";
 import { DomainExceptionFilter } from "./book/errors/domain-exception.filter";
 
 async function bootstrap() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     dotenv.config();
   }
 

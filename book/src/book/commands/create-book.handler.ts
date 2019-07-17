@@ -5,17 +5,17 @@ import { BookExistsException } from "../errors/book-exists.exception";
 import { EventStore } from "src/event-store/event-store";
 
 @CommandHandler(CreateBookCommand)
-export class CreateBookCommandHandler implements ICommandHandler<CreateBookCommand> {
-
+export class CreateBookCommandHandler
+  implements ICommandHandler<CreateBookCommand> {
   constructor(
     private readonly eventStore: EventStore,
     private readonly publisher: EventPublisher
-  ) { }
+  ) {}
 
   async execute(command: CreateBookCommand): Promise<void> {
     const book = await this.eventStore.get(command.code, BookAggregate);
 
-    if(book) {
+    if (book) {
       throw new BookExistsException();
     } else {
       const newBook = this.publisher.mergeObjectContext(
@@ -26,4 +26,3 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
     }
   }
 }
-

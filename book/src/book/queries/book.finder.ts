@@ -24,7 +24,9 @@ export class BookFinder {
       `
     };
 
-    const { result } = await container.items.query<BookReadModel>(querySpec, { enableCrossPartitionQuery: true }).toArray();
+    const { result } = await container.items
+      .query<BookReadModel>(querySpec, { enableCrossPartitionQuery: true })
+      .toArray();
     return result;
   }
 }

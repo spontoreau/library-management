@@ -12,15 +12,15 @@ export class EventStore {
     return client.database("EventStore").container("Event");
   }
 
-  async create(eventDescriptor: EventDescriptor): Promise<void>{
+  async create(eventDescriptor: EventDescriptor): Promise<void> {
     const container = this.getContainer();
-    await container.items.create(eventDescriptor);    
+    await container.items.create(eventDescriptor);
   }
 
   async get<T extends AggregateRoot>(
-    aggregateId: string, 
+    aggregateId: string,
     aggregateCtor: new (aggregateId: string) => T
-  ): Promise<T>{
+  ): Promise<T> {
     const container = this.getContainer();
 
     const querySpec: SqlQuerySpec = {
@@ -30,21 +30,24 @@ export class EventStore {
               FROM root
               WHERE root.aggregateId   = @aggregateId    
       `,
-      parameters: [{
-        name: "@aggregateId",
-        value: aggregateId
-      }]
-    }
+      parameters: [
+        {
+          name: "@aggregateId",
+          value: aggregateId
+        }
+      ]
+    };
 
-    const response = await container.items.query(querySpec, { enableCrossPartitionQuery: true }).toArray();
+    const response = await container.items
+      .query(querySpec, { enableCrossPartitionQuery: true })
+      .toArray();
 
-    if(response.result && response.result.length > 0) {
+    if (response.result && response.result.length > 0) {
       const aggregate = new aggregateCtor(aggregateId);
       aggregate.loadFromHistory(response.result);
       return aggregate;
     }
 
     return undefined;
-
   }
 }

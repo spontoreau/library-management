@@ -6,5 +6,4 @@ export class CreateBookCommand implements ICommand {
     public readonly title: string,
     public readonly author: string
   ) {}
-
 }

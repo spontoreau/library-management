@@ -1,6 +1,6 @@
 import { IsNotEmpty } from "class-validator";
 
-export class PostBookModel { 
+export class PostBookModel {
   @IsNotEmpty()
   code: string;
   @IsNotEmpty()

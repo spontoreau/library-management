@@ -7,6 +7,4 @@ import { EventStorePublisher } from "./event-store.publisher";
   providers: [EventStore, EventStorePublisher],
   exports: [EventStore, EventStorePublisher]
 })
-export class EventStoreModule {
-
-}
+export class EventStoreModule {}

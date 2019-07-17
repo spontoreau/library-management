@@ -10,19 +10,14 @@ import { EventStoreModule } from "src/event-store/event-store.module";
 @Module({
   imports: [CqrsModule, EventStoreModule],
   controllers: [BookController],
-  providers: [
-    BookFinder,
-    GetAllBookQueryHandler,
-    CreateBookCommandHandler,
-  ]
+  providers: [BookFinder, GetAllBookQueryHandler, CreateBookCommandHandler]
 })
 export class BookModule implements OnModuleInit {
   constructor(
     private readonly eventBus: EventBus,
-    private readonly eventStore: EventStorePublisher,
+    private readonly eventStore: EventStorePublisher
   ) {}
   onModuleInit() {
     this.eventBus.publisher = this.eventStore;
   }
-
 }

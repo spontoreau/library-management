@@ -18,7 +18,9 @@ export class BookController {
   }
 
   @Post()
-  async post(@Body()book: PostBookModel) {
-    return this.commandBus.execute(new CreateBookCommand(book.code, book.title, book.author));
+  async post(@Body() book: PostBookModel) {
+    return this.commandBus.execute(
+      new CreateBookCommand(book.code, book.title, book.author)
+    );
   }
 }
