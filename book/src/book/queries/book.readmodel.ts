@@ -1,6 +1,5 @@
-export interface BookProjection {
+export interface BookReadModel {
   readonly code: string;
   readonly title: string;
   readonly author: string;
-  readonly lent: boolean;
 }
