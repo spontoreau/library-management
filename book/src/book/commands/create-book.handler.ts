@@ -13,13 +13,13 @@ export class CreateBookCommandHandler implements ICommandHandler<CreateBookComma
   ) { }
 
   async execute(command: CreateBookCommand): Promise<void> {
-    const book = await this.eventStore.get(command.aggregateId, BookAggregate);
+    const book = await this.eventStore.get(command.code, BookAggregate);
 
     if(book) {
       throw new BookExistsException();
     } else {
       const newBook = this.publisher.mergeObjectContext(
-        new BookAggregate(command.aggregateId)
+        new BookAggregate(command.code)
       );
       newBook.create(command.title, command.author);
       newBook.commit();
