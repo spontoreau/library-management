@@ -9,7 +9,7 @@ export class EventStore {
     const endpoint = process.env.EVENT_STORE_ENDPOINT;
     const masterKey = process.env.EVENT_STORE_KEY;
     const client = new CosmosClient({ endpoint, auth: { masterKey } });
-    return client.database("EventStore").container("Events");
+    return client.database("EventStore").container("Event");
   }
 
   async create(eventDescriptor: EventDescriptor): Promise<void>{

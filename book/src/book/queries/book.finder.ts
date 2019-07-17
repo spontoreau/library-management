@@ -4,7 +4,7 @@ import { BookReadModel } from "./book.readmodel";
 
 @Injectable()
 export class BookFinder {
-  private getBookContainer() {
+  private getContainer() {
     const endpoint = process.env.READ_ENDPOINT;
     const masterKey = process.env.READ_KEY;
     const client = new CosmosClient({ endpoint, auth: { masterKey } });
@@ -13,7 +13,7 @@ export class BookFinder {
   }
 
   async getAll() {
-    const container = this.getBookContainer();
+    const container = this.getContainer();
 
     const querySpec: SqlQuerySpec = {
       query: `SELECT 
