@@ -5,8 +5,8 @@ import { BookReadModel } from "./book.readmodel";
 @Injectable()
 export class BookFinder {
   private getContainer() {
-    const endpoint = process.env.READ_ENDPOINT;
-    const masterKey = process.env.READ_KEY;
+    const endpoint = process.env.LIBRARY_ENDPOINT;
+    const masterKey = process.env.LIBRARY_KEY;
     const client = new CosmosClient({ endpoint, auth: { masterKey } });
 
     return client.database("Library").container("Book");
